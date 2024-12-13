@@ -8,7 +8,7 @@ const lighthouseSchema = new Schema(
         latitude: Number,
         longitude: Number,
         isSelected: Boolean,
-        characteristic: String
+        characteristics: String
     }
 )
 
