@@ -25,7 +25,7 @@ mongoose.connection.once('open', async () => {
 
     const lighthouseCount = await Lighthouse.countDocuments({});
     if (lighthouseCount === 0) {
-        console.log('No lighthouses found. Populating database...');
+        console.log('No lighthouses found. Populating database....');
         await populateDB();
     } else {
         console.log('Lighthouses already exist in the database.');
