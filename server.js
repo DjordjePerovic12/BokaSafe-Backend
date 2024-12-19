@@ -7,6 +7,7 @@ const mongoose = require('mongoose');
 const connectDB = require('./config/dbConnection');
 const Lighthouse = require('./model/Lighthouse');
 const { populateDB } = require('./seeds/seeds');
+const path = require('path');
 
 const PORT = process.env.PORT || 3500;
 
@@ -17,7 +18,12 @@ app.use(cors(corsOptions));
 
 app.use(express.json());
 
-app.use('/lighthouses', require('./routes/lighthouses.js'));
+app.use(express.static(path.join(__dirname, '/public')));
+
+
+
+app.use('/', require('./routes/root'))
+app.use('/lighthouses', require('./routes/lighthouses'));
 
 mongoose.connection.once('open', async () => {
     console.log('Connected to MongoDB');
