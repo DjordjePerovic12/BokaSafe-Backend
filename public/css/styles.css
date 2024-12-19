@@ -1,0 +1,325 @@
+/* Global Styles */
+body {
+    font-family: 'Nunito', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #F4F7FA;
+    color: #333;
+  }
+  
+  /* Shared Gradient Container */
+  .gradient-container {
+    background: linear-gradient(135deg, #37AFE1, #80C4E9);
+    color: #fff;
+  }
+  
+  /* Header inside Gradient Container */
+  header {
+    text-align: center;
+    padding: 20px 10px;
+    box-shadow: none; /* No shadow to avoid visible transitions */
+  }
+  
+  header .logo-img {
+    height: 120px;
+    width: auto;
+  }
+  
+  nav {
+    margin-top: 10px;
+  }
+  
+  nav a {
+    margin: 0 15px;
+    text-decoration: none;
+    color: #fff;
+    font-weight: 600;
+    font-size: 16px;
+  }
+  
+  nav a:hover {
+    text-decoration: underline;
+  }
+  
+  /* Hero Section inside Gradient Container */
+  .hero {
+    text-align: center;
+    padding: 60px 20px;
+  }
+  
+  .hero h1 {
+    font-size: 40px;
+    margin-bottom: 10px;
+  }
+  
+  .hero p {
+    font-size: 20px;
+    margin-bottom: 30px;
+  }
+  
+  .hero .buttons {
+    margin-top: 20px;
+  }
+  
+  .hero .button {
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 12px 24px;
+    border-radius: 30px;
+    display: inline-block;
+    margin: 5px;
+  }
+  
+  .hero .button.primary {
+    background-color: #fff;
+    color: #37AFE1;
+    border: 2px solid #fff;
+  }
+  
+  .hero .button.primary:hover {
+    background-color: #37AFE1;
+    color: #fff;
+  }
+  
+  .hero .button.secondary {
+    background-color: transparent;
+    color: #fff;
+    border: 2px solid #fff;
+  }
+  
+  .hero .button.secondary:hover {
+    background-color: #fff;
+    color: #37AFE1;
+  }
+  
+  /* Section Styles */
+  .section {
+    padding: 50px 20px;
+    text-align: center;
+  }
+  
+  .section h2 {
+    font-size: 28px;
+    margin-bottom: 20px;
+    color: #37AFE1;
+  }
+  
+  .section p {
+    font-size: 18px;
+    margin-bottom: 30px;
+    color: #666;
+  }
+  
+  /* Products Section */
+  .products {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  
+  .product {
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 280px;
+    margin-bottom: 20px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .product:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+  }
+  
+  .product h3 {
+    font-size: 22px;
+    margin-bottom: 10px;
+    color: #37AFE1;
+  }
+  
+  .product p {
+    font-size: 16px;
+    color: #666;
+  }
+  
+  footer {
+    text-align: center;
+    padding: 20px;
+    font-size: 18px;
+    font-weight: 700;
+    color: #666;
+    background-color: #F4F7FA;
+    margin-top: 20px;
+    border-top: 1px solid #eaeaea;
+  }
+  
+  footer .contact-us {
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #f8f9fa;
+    border: 1px solid #eaeaea;
+    border-radius: 10px;
+    display: inline-block;
+    text-align: left;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+  }
+  
+  footer .contact-us h3 {
+    font-size: 20px;
+    color: #333;
+    margin-bottom: 15px;
+    text-align: center;
+  }
+  
+  footer .contact-us p {
+    font-size: 16px;
+    color: #666;
+    margin: 5px 0;
+  }
+  
+  footer .contact-us a {
+    text-decoration: none;
+    color: #37AFE1;
+    font-weight: 600;
+  }
+  
+  footer .contact-us a:hover {
+    text-decoration: underline;
+  }
+  
+  footer .footer-rights {
+    margin-top: 20px;
+    font-size: 14px;
+    color: #666;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  /* General Responsive Styles */
+html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    font-size: 16px;
+  }
+  
+  header, .hero, .section, footer {
+    padding: 20px 15px;
+  }
+  
+  /* Responsive Design for Smaller Screens */
+  @media (max-width: 768px) {
+    /* Navigation */
+    nav {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+  
+    nav a {
+      font-size: 14px;
+    }
+  
+    /* Hero Section */
+    .hero h1 {
+      font-size: 32px;
+    }
+  
+    .hero p {
+      font-size: 18px;
+    }
+  
+    .hero .contact-us {
+      padding: 15px;
+      max-width: 300px;
+    }
+  
+    /* Products Section */
+    .products {
+      flex-direction: column; /* Stack products vertically */
+      align-items: center;
+    }
+  
+    .product {
+      width: 90%; /* Use most of the available width */
+      max-width: 320px;
+    }
+  
+    /* Footer */
+    footer {
+      font-size: 14px;
+    }
+  }
+
+  .friendly-note {
+    margin-top: 20px;
+    background-color: #ffffff;
+    color: #333;
+    padding: 15px 20px;
+    border-radius: 10px;
+    display: inline-block;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .friendly-note p {
+    font-size: 18px;
+    font-weight: 500;
+    margin: 0;
+  }
+  
+  @media (max-width: 480px) {
+    /* Navigation */
+    header .logo-img {
+      height: 80px;
+      width: auto;
+    }
+  
+    nav {
+      flex-direction: column;
+    }
+  
+    nav a {
+      font-size: 14px;
+    }
+  
+    /* Hero Section */
+    .hero h1 {
+      font-size: 28px;
+    }
+  
+    .hero p {
+      font-size: 16px;
+    }
+  
+    /* Contact Us Card */
+    .hero .contact-us {
+      padding: 10px;
+      max-width: 280px;
+      font-size: 14px;
+    }
+  
+    /* Products Section */
+    .product {
+      width: 100%;
+      max-width: 280px;
+    }
+  
+    .product h3 {
+      font-size: 18px;
+    }
+  
+    .product p {
+      font-size: 14px;
+    }
+  }
+  
