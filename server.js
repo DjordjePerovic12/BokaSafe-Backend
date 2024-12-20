@@ -8,6 +8,7 @@ const connectDB = require('./config/dbConnection');
 const Lighthouse = require('./model/Lighthouse');
 const { populateDB } = require('./seeds/seeds');
 const path = require('path');
+const createAdminAccount = require('./public/scripts/createAdminAccount');
 
 const PORT = process.env.PORT || 3500;
 
@@ -20,10 +21,12 @@ app.use(express.json());
 
 app.use(express.static(path.join(__dirname, '/public')));
 
+createAdminAccount();
 
 
-app.use('/', require('./routes/root'))
-app.use('/lighthouses', require('./routes/lighthouses'));
+app.use('/', require('./routes/root'));
+app.use('/admin-login', require('./routes/login'));
+app.use('/api/lighthouses', require('./routes/api/lighthouses'));
 
 mongoose.connection.once('open', async () => {
     console.log('Connected to MongoDB');
