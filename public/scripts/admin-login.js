@@ -16,30 +16,37 @@ document.getElementById("loginForm").addEventListener("submit", async function (
     }
 
     try {
-        // Send the login data to the server
-        const baseUrl = window.location.origin
         const response = await fetch(`${baseUrl}/admin-login`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ username, password }), // Send data as JSON
+            body: JSON.stringify({ username, password }),
         });
-
-        // Handle the server response
+    
         if (response.ok) {
+            // Parse JSON only if the response is valid
             const data = await response.json();
             showAlert('Login successful!', 'success', () => {
-                // Redirect after showing the success alert
                 window.location.href = '/dashboard';
             });
         } else {
-            const error = await response.json();
+            // Handle non-2xx responses
+            const contentType = response.headers.get('content-type');
+            if (contentType && contentType.includes('application/json')) {
+                const error = await response.json();
+                console.error('Error from server:', error);
+                showAlert(error.message || 'Invalid username or password.', 'error');
+            } else {
+                console.error('Unexpected response type:', await response.text());
+                showAlert('Unexpected error. Please try again later.', 'error');
+            }
         }
     } catch (err) {
-        console.error('Error during login:', err);
-        showAlert('Invalid username or password.', 'error');
+        console.error('Network or parsing error:', err);
+        showAlert('Network error. Please check your connection.', 'error');
     }
+    
 });
 
 document.getElementById('togglePassword').addEventListener('click', function () {
