@@ -1,7 +1,7 @@
 // script.js
 
 // API URL (replace with your actual API endpoint)
-const apiUrl = 'https://bokadev.me/lighthouses';
+const baseUrl = 'https://bokadev.me';
 
 // Fetch and display the lighthouse data
 async function fetchLighthouses() {
@@ -11,7 +11,7 @@ async function fetchLighthouses() {
         // Show loading message
         tableBody.innerHTML = "<tr><td colspan='4'>Loading...</td></tr>";
 
-        const response = await fetch(apiUrl);
+        const response = await fetch(`${baseUrl}/api/lighthouses`);
         const data = await response.json();
 
         // Clear table and populate with data
