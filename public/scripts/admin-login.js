@@ -16,6 +16,7 @@ document.getElementById("loginForm").addEventListener("submit", async function (
     }
 
     try {
+        const baseUrl = 'https://bokadev.me'
         const response = await fetch(`${baseUrl}/admin-login`, {
             method: 'POST',
             headers: {
