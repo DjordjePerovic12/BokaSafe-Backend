@@ -18,7 +18,7 @@ document.getElementById("loginForm").addEventListener("submit", async function (
     try {
         // Send the login data to the server
         const baseUrl = window.location.origin
-        const response = await fetch('${apiBaseUrl}/admin-login', {
+        const response = await fetch(`${baseUrl}/admin-login`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
