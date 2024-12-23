@@ -7,21 +7,29 @@
     <link rel="stylesheet" href="css/admin-login.css">
 </head>
 <body>
-    <div class="login-card">
-        <form id="loginForm">
-            <div class="form-group">
-                <label for="username">Username</label>
-                <input type="text" id="username" placeholder="Enter your username" required>
-                <!-- Placeholder for potential error messages -->
-            </div>
-            <div class="form-group">
-                <label for="password">Password</label>
-                <input type="password" id="password" placeholder="Enter your password" required>
-                <!-- Placeholder for potential error messages -->
-            </div>
-            <button type="submit">Login</button>
-        </form>
-    </div>
-    <script src="scripts/admin-login.js"></script>
-</body>
+    <body>
+        <div class="login-card">
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" placeholder="Enter your username" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <div class="password-container">
+                        <input type="password" id="password" placeholder="Enter your password" required>
+                        <button type="button" id="togglePassword" class="toggle-button" aria-label="Toggle password visibility">
+                            Show
+                        </button>
+                    </div>
+                </div>
+                <button type="submit">Login</button>
+            </form>
+            <div id="alert-container"></div>
+        </div>
+        <!-- Alert container is now directly below the login card -->
+        <script src="scripts/admin-login.js"></script>
+    </body>
+    
+
 </html>

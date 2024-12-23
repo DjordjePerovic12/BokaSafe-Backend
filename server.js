@@ -26,6 +26,7 @@ createAdminAccount();
 
 app.use('/', require('./routes/root'));
 app.use('/admin-login', require('./routes/login'));
+app.use('/dashboard', require('./routes/dashboard'));
 app.use('/api/lighthouses', require('./routes/api/lighthouses'));
 
 mongoose.connection.once('open', async () => {

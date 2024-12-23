@@ -1,77 +1,144 @@
+/* General styling */
+body {
+    font-family: 'Nunito', Arial, sans-serif;
+    background-color: #78211E;
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
-        body {
-            font-family: 'Nunito', Arial, sans-serif;
-            background-color: #78211E;
-            margin: 0;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
+/* Centered login card */
+.login-card {
+    background: #6f6f72;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 40px 30px;
+    width: 100%;
+    max-width: 400px;
+}
 
-        .login-card {
-            background: #6f6f72;
-            border-radius: 12px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            padding: 40px 30px;
-            width: 100%;
-            max-width: 400px;
-        }
+/* Form group styling */
+.form-group {
+    margin-bottom: 20px;
+    position: relative;
+}
 
-        .login-card h2 {
-            margin-bottom: 20px;
-            color: #333333;
-            text-align: center;
-        }
+/* Label styling */
+label {
+    font-size: 16px;
+    color: #ffffff;
+    margin-bottom: 5px;
+    display: block;
+}
 
-        .form-group {
-            margin-bottom: 20px;
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            width: 100%;
-        }
+/* Ensure inputs and the container are the same width */
+.password-container, .form-group input {
+    display: block;
+    width: 100%; /* Full width for all inputs and the container */
+    box-sizing: border-box; /* Include padding and border in width */
+}
 
-        .form-group input {
-            width: 90%;
-            padding: 12px 10px;
-            border: 1px solid #ccc;
-            border-radius: 8px;
-            font-size: 16px;
-            outline: none;
-            background: #f9f9f9;
-            margin: 0 auto;
-        }
+/* Input field styling */
+.form-group input {
+    padding: 12px 40px 12px 10px; /* Space for the toggle button in password field */
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background: #f9f9f9;
+    outline: none;
+}
 
-        .form-group label {
-            font-size: 16px;
-            color: #ffffff;
-            margin-bottom: 5px;
-            margin-left: 5%;
-        }
+/* Password container for toggle button */
+.password-container {
+    position: relative;
+}
 
-        button {
-            background-color: #78211E;
-            color: #ffffff;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 16px;
-            display: block;
-            margin: 0 auto;
-            transition: background-color 0.3s;
-        }
+/* Toggle button inside the password field */
+.password-container .toggle-button {
+    position: absolute;
+    top: 50%;
+    right: 10px; /* Align toggle button to the right */
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    font-size: 14px;
+    cursor: pointer;
+    color: #333;
+}
 
-        button:hover {
-            background-color: #338e56;
-        }
+/* Submit button styling */
+button[type="submit"] {
+    background-color: #78211E;
+    color: #ffffff;
+    border: none;
+    padding: 12px 20px; /* Standard padding */
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    text-align: center;
+    transition: background-color 0.3s;
+    display: block;
+    margin: 0 auto; /* Center the button horizontally */
+}
 
-        .error-message {
-            color: #ffffff;
-            font-size: 14px;
-            margin-top: 5px;
-            margin-left: 5%;
-        }
-        
+button[type="submit"]:hover {
+    background-color: #338e56;
+}
+
+
+/* Updated Alert container */
+#alert-container {
+    position: static; /* Make it part of the normal flow, under the login card */
+    margin-top: 20px; /* Add spacing from the login card */
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* Base alert styling remains unchanged */
+.alert {
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-size: 16px;
+    color: #ffffff;
+    animation: fadeIn 0.3s ease, fadeOut 0.3s ease 3s forwards;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    max-width: 90%;
+    margin: 0 auto;
+}
+
+/* Success alert remains unchanged */
+.alert.success {
+    background-color: #338e56; /* Green for success */
+}
+
+/* Error alert with a white border */
+.alert.error {
+    background-color: #78211E; /* Red for error */
+    border: 2px solid #ffffff; /* Distinction with white border */
+}
+
+
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeOut {
+    to {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+}

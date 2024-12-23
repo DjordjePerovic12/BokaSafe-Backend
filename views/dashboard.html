@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BokaSafe Admin panel</title>
+    <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body>
+    <div class="container">
+        <aside class="sidebar">
+            <div class="logo">
+                <img src="img/boka.png" alt="BokaDev Logo" class="logo-img">
+            </div>
+            <nav class="menu">
+                <ul>
+                    <li><a href="#" class="active">Lighthouses</a></li>
+                </ul>
+            </nav>
+        </aside>
+        <main class="main-content">
+            <header class="header">
+                <h1>Lighthouses</h1>
+                <button class="add-button">Add Lighthouse</button>
+            </header>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Photos</th>
+                        <th>Edit</th>
+                    </tr>
+                </thead>
+                <tbody id="lighthouse-list">
+                    <!-- Populated dynamically via JavaScript -->
+                </tbody>
+            </table>
+        </main>
+    </div>
+    <script src="scripts/dashboard.js"></script>
+</body>
+</html>
