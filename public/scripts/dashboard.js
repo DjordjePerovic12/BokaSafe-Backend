@@ -1,29 +1,38 @@
-// script.js
+document.addEventListener("DOMContentLoaded", () => {
+    fetchLighthouses();
 
-// API URL (replace with your actual API endpoint)
-const baseUrl = 'https://bokadev.me';
+    // Attach event listener to the table for delegation
+    const table = document.getElementById("lighthouse-list");
+    table.addEventListener("click", (event) => {
+        if (event.target.classList.contains("edit-button")) {
+            const lighthouseId = event.target.dataset.id;
+            editLighthouse(lighthouseId);
+        }
+    });
+});
 
-// Fetch and display the lighthouse data
 async function fetchLighthouses() {
     const tableBody = document.getElementById("lighthouse-list");
+    const baseUrl = 'https://bokadev.me'
 
     try {
-        // Show loading message
         tableBody.innerHTML = "<tr><td colspan='4'>Loading...</td></tr>";
 
         const response = await fetch(`${baseUrl}/api/lighthouses`);
         const data = await response.json();
 
-        // Clear table and populate with data
-        tableBody.innerHTML = "";
-        data.forEach((lighthouse) => {
+        tableBody.innerHTML = ""; // Clear table
+
+        data.sort((a, b) => a.id - b.id).forEach((lighthouse) => {
             const row = `
-                <tr>
-                    <td>${lighthouse.id}</td>
-                    <td>${lighthouse.name}</td>
-                    <td><button class="photo-button">📷</button></td>
-                    <td><button class="edit-button" onclick="editLighthouse(${lighthouse.id})">✏️ Edit</button></td>
-                </tr>
+            <tr>
+                <td>${lighthouse.id}</td>
+                <td>${lighthouse.name}</td>
+                <td><button class="edit-button" data-id="${lighthouse.id}">
+            <span class="material-icons">edit</span> Edit
+        </button>
+                </td>
+            </tr>
             `;
             tableBody.innerHTML += row;
         });
@@ -31,13 +40,9 @@ async function fetchLighthouses() {
         console.error("Error fetching lighthouses:", error);
         tableBody.innerHTML = "<tr><td colspan='4'>Error loading data.</td></tr>";
     }
-};
+}
 
-// Edit lighthouse handler
 function editLighthouse(id) {
     alert(`Editing lighthouse with ID: ${id}`);
     // Implement edit logic here (e.g., open a modal or redirect to edit page)
 }
-
-// Fetch lighthouses on page load
-document.addEventListener("DOMContentLoaded", fetchLighthouses);
