@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BokaSafe Admin panel</title>
+    <title>BokaSafe Admin Panel</title>
     <link rel="stylesheet" href="css/dashboard.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
@@ -35,6 +35,33 @@
                     <!-- Populated dynamically via JavaScript -->
                 </tbody>
             </table>
+
+            <!-- Edit Lighthouse Form (Popup) -->
+            <div id="editFormPopup" class="popup">
+                <div class="popup-content">
+                    <span class="close-btn" onclick="closeForm()">&times;</span>
+                    <h2>Edit Lighthouse Status</h2>
+                    <form id="editForm">
+                        <input type="hidden" id="lighthouseId">
+                        <label for="name">Name:</label>
+                        <input type="text" id="name" disabled>
+
+                        <label for="location">Location:</label>
+                        <input type="text" id="location" disabled>
+
+                        <label for="status">Status:</label>
+                        <select id="status">
+                            <option value="OK">OK</option>
+                            <option value="Not OK">Not OK</option>
+                        </select>
+
+                        <div class="form-buttons">
+                            <button type="button" onclick="cancelEdit()">Cancel</button>
+                            <button type="button" onclick="saveStatus()">Save</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </main>
     </div>
     <script src="scripts/dashboard.js"></script>

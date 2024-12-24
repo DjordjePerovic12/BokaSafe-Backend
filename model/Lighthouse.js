@@ -8,6 +8,10 @@ const lighthouseSchema = new Schema(
         latitude: Number,
         longitude: Number,
         isSelected: Boolean,
+        status: {
+            type: String,
+            default: 'OK'
+        },
         characteristics: String
     }
 )

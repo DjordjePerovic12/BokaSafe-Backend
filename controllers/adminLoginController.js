@@ -1,5 +1,4 @@
 const User = require('../model/User');
-
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
@@ -27,7 +26,7 @@ const handleLogin = async(req, res) => {
              
         },
             process.env.ACCESS_TOKEN_SECRET,
-            { expiresIn: '6000s' }
+            { expiresIn: '3600s' }
         );
         const refreshToken = jwt.sign(
             {"username" : foundUser.username },

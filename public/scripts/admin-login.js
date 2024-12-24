@@ -16,7 +16,7 @@ document.getElementById("loginForm").addEventListener("submit", async function (
     }
 
     try {
-        const baseUrl = 'https://bokadev.me'
+        const baseUrl = window.location.origin
         const response = await fetch(`${baseUrl}/admin-login`, {
             method: 'POST',
             headers: {
@@ -30,6 +30,7 @@ document.getElementById("loginForm").addEventListener("submit", async function (
             const data = await response.json();
             showAlert('Login successful!', 'success', () => {
                 window.location.href = '/dashboard';
+                localStorage.setItem("accessToken", data.accessToken)
             });
         } else {
             // Handle non-2xx responses

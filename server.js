@@ -25,9 +25,11 @@ createAdminAccount();
 
 
 app.use('/', require('./routes/root'));
-app.use('/admin-login', require('./routes/login'));
-app.use('/dashboard', require('./routes/dashboard'));
 app.use('/api/lighthouses', require('./routes/api/lighthouses'));
+app.use('/admin-login', require('./routes/login'));
+app.use('/refresh', require('./routes/refresh'));
+app.use('/dashboard', require('./routes/dashboard'));
+
 
 mongoose.connection.once('open', async () => {
     console.log('Connected to MongoDB');
