@@ -122,7 +122,7 @@ html, body {
     transform: translateY(-2px); /* Lift effect */
 }
 
-/* Popup Styles */
+/* Modernized Popup Styling */
 .popup {
     visibility: hidden;
     opacity: 0;
@@ -132,11 +132,12 @@ html, body {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.6);
     justify-content: center;
     align-items: center;
     transition: opacity 0.3s ease, visibility 0.3s ease;
     z-index: 1000;
+    font-family: 'Nunito', sans-serif;
 }
 
 .popup.show {
@@ -145,31 +146,146 @@ html, body {
 }
 
 .popup-content {
-    background-color: white;
-    padding: 20px;
-    border-radius: 5px;
+    background-color: #333333;
+    padding: 30px;
+    border-radius: 10px;
     max-width: 500px;
-    width: auto;
-    text-align: center;
+    width: 100%;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    color: white;
 }
 
 .close-btn {
     position: absolute;
-    top: 10px;
-    right: 10px;
-    font-size: 20px;
+    top: 15px;
+    right: 15px;
+    font-size: 24px;
     cursor: pointer;
+    color: white;
+    transition: color 0.3s ease;
+}
+
+.close-btn:hover {
+    color: #cccccc;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    display: inline-block;
+    width: 120px;
+    text-align: left;
+    margin-right: 10px;
+    font-weight: 600;
+    font-size: 14px;
+    color: white;
 }
 
 input, select {
-    width: 100%;
+    flex-grow: 1;
     padding: 10px;
     margin: 10px 0;
-    border: 1px solid #ddd;
-    border-radius: 4px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    font-family: 'Nunito', sans-serif;
+    color: white;
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+input:disabled {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.7);
+}
+
+select {
+    background-color: #333333;
+    color: white;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-family: 'Nunito', sans-serif;
+}
+
+select option {
+    background-color: #333333;
+    color: white;
+}
+
+
+.form-group {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
 }
 
 .form-buttons {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
+    gap: 20px;
+}
+
+.save-text {
+    align-self: center;
+    font-size: 14px;
+    color: #a8e6cf;
+    cursor: pointer;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+.save-text:hover {
+    color: #82e2bf;
+}
+
+
+.cancel-text {
+    align-self: center;
+    font-size: 14px;
+    color: #ffffff;
+    cursor: pointer;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+.cancel-text:hover {
+    color: #d8d5d5ff;
+}
+
+
+/* Notification Styling */
+.notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 15px 20px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    color: white;
+    z-index: 2000;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s ease;
+}
+
+.notification.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.notification.success {
+    background: linear-gradient(135deg, #4caf50, #81c784);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.notification.error {
+    background: linear-gradient(135deg, #e53935, #ef5350);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
 }

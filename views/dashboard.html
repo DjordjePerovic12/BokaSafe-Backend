@@ -43,25 +43,29 @@
                     <h2>Edit Lighthouse Status</h2>
                     <form id="editForm">
                         <input type="hidden" id="lighthouseId">
-                        <label for="name">Name:</label>
+                        <label for="name">Name</label>
                         <input type="text" id="name" disabled>
 
-                        <label for="location">Location:</label>
+                        <label for="location">Location</label>
                         <input type="text" id="location" disabled>
 
-                        <label for="status">Status:</label>
+                        <label for="characteristics">Characteristics</label>
+                        <input type="text" id="characteristics" disabled>
+
+                        <label for="status">Status</label>
                         <select id="status">
                             <option value="OK">OK</option>
                             <option value="Not OK">Not OK</option>
                         </select>
 
                         <div class="form-buttons">
-                            <button type="button" onclick="cancelEdit()">Cancel</button>
-                            <button type="button" onclick="saveStatus()">Save</button>
+                            <span class="cancel-text" onclick="cancelEdit()">Cancel</span>
+                            <span class="save-text" onclick="saveStatus()">Save</span>
                         </div>
                     </form>
                 </div>
             </div>
+            <div id="notification" class="notification"></div>
         </main>
     </div>
     <script src="scripts/dashboard.js"></script>

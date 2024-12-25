@@ -1,4 +1,5 @@
 const Lighthouse = require('../model/Lighthouse');
+const admin = require('../config/firbease');
 
 
 const getAllLighthouses = async(req, res) => {
@@ -36,6 +37,26 @@ const editLighthouse = async(req, res) => {
 
     if(req.body?.status) lighthouse.status = req.body.status;
     const result = await lighthouse.save();
+
+    try {
+        const payload = {
+            data: {
+                title: "Lighthouse Status Updated",
+                body: `The status of Lighthouse ${lighthouse.name} has been changed to ${lighthouse.status}.`,
+            }
+        };
+
+        // Replace this with a topic or device tokens
+        const topic = "lighthouse_updates";
+
+        await admin.messaging().send({
+            topic,
+            ...payload,
+        });
+        console.log("Push notification sent successfully.");
+    } catch (error) {
+        console.error("Error sending notification:", error);
+    }
 
     res.status(201).json(result);
 };

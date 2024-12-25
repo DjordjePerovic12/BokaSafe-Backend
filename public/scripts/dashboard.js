@@ -58,6 +58,7 @@ async function fetchLighthouseDetails(id) {
     const formPopup = document.getElementById("editFormPopup");
     const nameField = document.getElementById("name");
     const locationField = document.getElementById("location");
+    const characteristicsField = document.getElementById("characteristics");
     const statusField = document.getElementById("status");
     const lighthouseIdField = document.getElementById("lighthouseId");
 
@@ -71,6 +72,7 @@ async function fetchLighthouseDetails(id) {
         lighthouseIdField.value = lighthouse.id;
         nameField.value = lighthouse.name;
         locationField.value = `${lighthouse.latitude}, ${lighthouse.longitude}`;
+        characteristicsField.value = lighthouse.characteristics;
         statusField.value = lighthouse.status;
     } catch (error) {
         console.error("Error fetching lighthouse details:", error);
@@ -89,22 +91,31 @@ function cancelEdit() {
 async function saveStatus() {
     const lighthouseId = document.getElementById("lighthouseId").value;
     const status = document.getElementById("status").value;
+    const baseUrl = window.location.origin;
+
+    const showNotification = (message, type) => {
+        const notification = document.getElementById("notification");
+        notification.textContent = message;
+        notification.className = `notification show ${type}`;
+        setTimeout(() => {
+            notification.className = "notification";
+        }, 3000);
+    };
 
     try {
-        const response = await fetch(`https://bokadev.me/api/lighthouses/${lighthouseId}`, {
-            method: 'PATCH',
+        const response = await fetch(`${baseUrl}/api/lighthouses`, {
+            method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ status })
+            body: JSON.stringify({ id: lighthouseId, status: status })
         });
 
         if (!response.ok) throw new Error("Failed to update status");
-
-        alert("Status updated successfully.");
+        showNotification("Status updated successfully.", "success");
         closeForm();
         fetchLighthouses();
     } catch (error) {
         console.error("Error updating status:", error);
-        alert("Error updating status.");
+        showNotification("Error updating status.", "error");
     }
 }
 
