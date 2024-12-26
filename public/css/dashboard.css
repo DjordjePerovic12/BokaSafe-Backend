@@ -103,26 +103,26 @@ html, body {
 }
 
 .table button {
-    background-color: #78211E; /* Blue background */
-    color: #fff; /* White text */
-    border: none; /* Remove border */
-    padding: 8px 12px; /* Padding for size */
-    border-radius: 5px; /* Rounded corners */
-    cursor: pointer; /* Pointer cursor on hover */
-    font-weight: 600; /* Bold text */
-    font-size: 0.9rem; /* Adjust font size */
+    background-color: #78211E;
+    color: #fff;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.9rem;
     transition: background-color 0.3s ease, transform 0.2s ease;
     display: flex;
     align-items: center;
-    gap: 8px; /* Space between icon and text */
+    gap: 8px;
 }
 
 .table button:hover {
-    background-color: #993733; /* Darker blue on hover */
-    transform: translateY(-2px); /* Lift effect */
+    background-color: #993733;
+    transform: translateY(-2px);
 }
 
-/* Modernized Popup Styling */
+/* Popup Styles */
 .popup {
     visibility: hidden;
     opacity: 0;
@@ -137,7 +137,6 @@ html, body {
     align-items: center;
     transition: opacity 0.3s ease, visibility 0.3s ease;
     z-index: 1000;
-    font-family: 'Nunito', sans-serif;
 }
 
 .popup.show {
@@ -146,7 +145,7 @@ html, body {
 }
 
 .popup-content {
-    background-color: #333333;
+    background-color: #333;
     padding: 30px;
     border-radius: 10px;
     max-width: 500px;
@@ -162,11 +161,6 @@ html, body {
     font-size: 24px;
     cursor: pointer;
     color: white;
-    transition: color 0.3s ease;
-}
-
-.close-btn:hover {
-    color: #cccccc;
 }
 
 form {
@@ -175,50 +169,23 @@ form {
 }
 
 label {
-    display: inline-block;
-    width: 120px;
-    text-align: left;
-    margin-right: 10px;
     font-weight: 600;
     font-size: 14px;
     color: white;
 }
 
 input, select {
-    flex-grow: 1;
     padding: 10px;
     margin: 10px 0;
     border: 1px solid #ccc;
     border-radius: 5px;
     font-size: 14px;
-    font-family: 'Nunito', sans-serif;
     color: white;
     background-color: rgba(255, 255, 255, 0.2);
 }
 
-input:disabled {
-    background-color: rgba(255, 255, 255, 0.1);
-    color: rgba(255, 255, 255, 0.7);
-}
-
 select {
-    background-color: #333333;
-    color: white;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-family: 'Nunito', sans-serif;
-}
-
-select option {
-    background-color: #333333;
-    color: white;
-}
-
-
-.form-group {
-    display: flex;
-    align-items: center;
-    margin-bottom: 15px;
+    background-color: #333;
 }
 
 .form-buttons {
@@ -227,37 +194,12 @@ select option {
     gap: 20px;
 }
 
-.save-text {
-    align-self: center;
-    font-size: 14px;
-    color: #a8e6cf;
-    cursor: pointer;
-    text-decoration: none;
-    font-weight: 600;
-    transition: color 0.3s ease;
+/* Hide views */
+.hidden {
+    display: none;
 }
 
-.save-text:hover {
-    color: #82e2bf;
-}
-
-
-.cancel-text {
-    align-self: center;
-    font-size: 14px;
-    color: #ffffff;
-    cursor: pointer;
-    text-decoration: none;
-    font-weight: 600;
-    transition: color 0.3s ease;
-}
-
-.cancel-text:hover {
-    color: #d8d5d5ff;
-}
-
-
-/* Notification Styling */
+/* Notification Styles */
 .notification {
     position: fixed;
     top: 20px;
@@ -267,25 +209,152 @@ select option {
     font-size: 16px;
     font-weight: bold;
     color: white;
-    z-index: 2000;
-    opacity: 0;
     visibility: hidden;
+    opacity: 0;
     transform: translateY(-10px);
-    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s ease;
+    transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
 .notification.show {
-    opacity: 1;
     visibility: visible;
+    opacity: 1;
     transform: translateY(0);
 }
 
 .notification.success {
     background: linear-gradient(135deg, #4caf50, #81c784);
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
 }
 
 .notification.error {
     background: linear-gradient(135deg, #e53935, #ef5350);
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+
+/* Button to Add New Document */
+.upload-btn {
+    background-color: #78211E;
+    color: white;
+    padding: 10px 20px;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    margin: 20px 0;
+}
+
+.upload-btn:hover {
+    background-color: #993733;
+    transform: translateY(-2px);
+}
+
+/* Document Upload Form */
+.upload-form {
+    background-color: #333;
+    padding: 20px;
+    border-radius: 10px;
+    width: 100%;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    color: white;
+    margin-top: 20px;
+}
+
+.upload-form.hidden {
+    display: none;
+}
+
+.upload-form label {
+    font-size: 14px;
+    font-weight: bold;
+    color: white;
+}
+
+.upload-form input[type="text"],
+.upload-form input[type="file"] {
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    font-size: 14px;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.2);
+    color: white;
+}
+
+.upload-form .form-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 20px;
+}
+
+.upload-form .save-text, .upload-form .cancel-text {
+    padding: 10px 20px;
+    cursor: pointer;
+    font-weight: bold;
+    color: white;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.upload-form .save-text {
+    background-color: #4CAF50;
+}
+
+.upload-form .cancel-text {
+    background-color: #e53935;
+}
+
+/* Table Styles for Documents */
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #fff;
+    border-radius: 5px;
+    overflow: hidden;
+    margin-top: 30px;
+}
+
+.table th, .table td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.table th {
+    background-color: #ecf0f1;
+    font-weight: bold;
+}
+
+.table button {
+    background-color: #78211E;
+    color: #fff;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.table button:hover {
+    background-color: #993733;
+    transform: translateY(-2px);
+}
+
+/* Specific Style for Delete Button */
+.delete-button {
+    background-color: #e53935; /* Red */
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.delete-button:hover {
+    background-color: #d32f2f;
+    transform: translateY(-2px);
 }

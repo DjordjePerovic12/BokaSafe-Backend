@@ -7,6 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
         localStorage.clear();
     }
 
+    // Fetch and initialize Lighthouses
     fetchLighthouses();
 
     const table = document.getElementById("lighthouse-list");
@@ -17,7 +18,28 @@ document.addEventListener("DOMContentLoaded", () => {
             editLighthouse(lighthouseId);
         }
     });
+
+    // Fetch and initialize Documents
+    fetchDocuments();
+
+    const documentsTable = document.getElementById("documents-list");
+    documentsTable.addEventListener("click", (event) => {
+        const button = event.target.closest(".delete-button");
+        if (button) {
+            const documentId = button.dataset.id;
+            deleteDocument(documentId);
+        }
+    });
+
+    document.getElementById("uploadBtn").addEventListener("click", toggleUploadForm);
+    document.getElementById("documentUploadForm").addEventListener("submit", uploadDocument);
+
+    // Toggle between Lighthouses and Documents views
+    document.getElementById("lighthousesMenu").addEventListener("click", () => showSection('lighthouses'));
+    document.getElementById("documentsMenu").addEventListener("click", () => showSection('documents'));
 });
+
+// **Lighthouse-related logic (Preserved as is)**
 
 async function fetchLighthouses() {
     const tableBody = document.getElementById("lighthouse-list");
@@ -36,8 +58,8 @@ async function fetchLighthouses() {
                     <td>${lighthouse.id}</td>
                     <td>${lighthouse.name}</td>
                     <td><button class="edit-button" data-id="${lighthouse.id}">
-            <span class="material-icons">edit</span> Edit
-        </button></td>
+                        <span class="material-icons">edit</span> Edit
+                    </button></td>
                 </tr>
             `;
         });
@@ -126,4 +148,156 @@ function isTokenExpired(token) {
     } catch {
         return true;
     }
+}
+
+// **Document-related logic (Added)**
+
+async function fetchDocuments() {
+    const tableBody = document.getElementById("documents-list");
+    const baseUrl = window.location.origin;
+
+    try {
+        tableBody.innerHTML = "<tr><td colspan='3'>Loading...</td></tr>";
+
+        const response = await fetch(`${baseUrl}/api/documents`);
+        if (!response.ok) throw new Error("Failed to fetch documents");
+
+        const data = await response.json();
+        tableBody.innerHTML = "";
+
+        data.forEach(document => {
+            tableBody.innerHTML += `
+                <tr>
+                    <td>${document.id}</td>
+                    <td>${document.name}</td>
+                    <td><button class="delete-button" data-id="${document.id}">
+                        <span class="material-icons">delete</span> Delete
+                    </button></td>
+                </tr>
+            `;
+        });
+    } catch (error) {
+        console.error("Error fetching documents:", error);
+        tableBody.innerHTML = "<tr><td colspan='3'>Error loading data.</td></tr>";
+    }
+}
+
+async function deleteDocument(documentId) {
+    const baseUrl = window.location.origin;
+    console.log(documentId);
+
+    try {
+        // Send the request with the documentId in the body
+        const response = await fetch(`${baseUrl}/api/documents`, {
+            method: 'DELETE', // DELETE method to match the server controller
+            headers: {
+                'Content-Type': 'application/json', // Ensure correct content type
+            },
+            body: JSON.stringify({ id: documentId }), // Send the ID in the request body
+        });
+
+        // Check if the response is OK (status code 200-299)
+        if (!response.ok) throw new Error("Failed to delete document");
+
+        // Handle success
+        showNotification("Document deleted successfully.", "success");
+        fetchDocuments();  // Re-fetch the documents list
+
+    } catch (error) {
+        console.error("Error deleting document:", error);
+        showNotification("Error deleting document.", "error");
+    }
+}
+
+
+function toggleUploadForm() {
+    document.getElementById("uploadForm").classList.toggle("hidden");
+}
+
+async function uploadDocument(event) {
+    event.preventDefault();  // Prevent default form submission
+
+    // Get the form element and FormData from it
+    const form = document.getElementById("documentUploadForm");
+    const formData = new FormData(form);
+
+    // Get the file from the FormData object (this assumes your input name is 'file')
+    const file = formData.get('file');  
+    if (!file) {
+        showNotification("Please select a file to upload.", "error");
+        return;  // Exit if no file is selected
+    }
+
+    console.log("Selected file:", file);  // Log the file (remove this in production)
+    
+    // Log the entire FormData (Note: This is not the best way to log FormData, but it works for small cases)
+    for (let pair of formData.entries()) {
+        console.log(pair[0]+ ': ' + pair[1]);
+    }
+
+    const baseUrl = window.location.origin;
+
+    // Optionally disable the upload button during the upload process to prevent double submission
+    const uploadButton = document.getElementById("uploadButton");
+    if (uploadButton) {
+        uploadButton.disabled = true;
+    }
+
+    try {
+        const response = await fetch(`${baseUrl}/api/documents`, {
+            method: 'POST',
+            body: formData,  // Send the form data (which includes the file)
+        });
+
+        if (!response.ok) throw new Error("Failed to upload document");
+
+        // Show success message
+        showNotification("Document uploaded successfully.", "success");
+
+        // Hide the upload form and reset it
+        document.getElementById("uploadForm").classList.add("hidden");
+        form.reset();  // Clear the form
+
+        // Re-fetch the documents list after upload
+        fetchDocuments();
+    } catch (error) {
+        console.error("Error uploading document:", error);
+        showNotification("Error uploading document.", "error");
+    } finally {
+        // Re-enable the upload button
+        if (uploadButton) {
+            uploadButton.disabled = false;
+        }
+    }
+}
+
+
+
+function showSection(section) {
+    const lighthousesView = document.getElementById("lighthousesView");
+    const documentsView = document.getElementById("documentsView");
+    const lighthousesMenu = document.getElementById("lighthousesMenu");
+    const documentsMenu = document.getElementById("documentsMenu");
+
+    if (section === 'lighthouses') {
+        lighthousesView.classList.remove("hidden");
+        documentsView.classList.add("hidden");
+        lighthousesMenu.classList.add("active");
+        documentsMenu.classList.remove("active");
+    } else {
+        lighthousesView.classList.add("hidden");
+        documentsView.classList.remove("hidden");
+        lighthousesMenu.classList.remove("active");
+        documentsMenu.classList.add("active");
+    }
+}
+
+function showNotification(message, type) {
+    const notification = document.getElementById("notification");
+    notification.textContent = message;
+    notification.className = `notification show ${type}`;
+
+    setTimeout(() => {
+        notification.className = "notification";
+    }, 3000);
 }

@@ -9,65 +9,119 @@
 </head>
 <body>
     <div class="container">
+        <!-- Sidebar Navigation -->
         <aside class="sidebar">
             <div class="logo">
                 <img src="img/boka.png" alt="BokaDev Logo" class="logo-img">
             </div>
             <nav class="menu">
                 <ul>
-                    <li><a href="#" class="active">Lighthouses</a></li>
+                    <li><a href="#" id="lighthousesMenu" class="active">Lighthouses</a></li>
+                    <li><a href="#" id="documentsMenu">Documents</a></li>
                 </ul>
             </nav>
         </aside>
+
+        <!-- Main Content Area -->
         <main class="main-content">
-            <header class="header">
-                <h1>Lighthouses</h1>
-            </header>
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Name</th>
-                        <th>Edit</th>
-                    </tr>
-                </thead>
-                <tbody id="lighthouse-list">
-                    <!-- Populated dynamically via JavaScript -->
-                </tbody>
-            </table>
+            <!-- Lighthouses View -->
+            <section id="lighthousesView" class="view active">
+                <header class="header">
+                    <h1>Lighthouses</h1>
+                </header>
 
-            <!-- Edit Lighthouse Form (Popup) -->
-            <div id="editFormPopup" class="popup">
-                <div class="popup-content">
-                    <span class="close-btn" onclick="closeForm()">&times;</span>
-                    <h2>Edit Lighthouse Status</h2>
-                    <form id="editForm">
-                        <input type="hidden" id="lighthouseId">
-                        <label for="name">Name</label>
-                        <input type="text" id="name" disabled>
+                <!-- Lighthouses Table -->
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Edit</th>
+                        </tr>
+                    </thead>
+                    <tbody id="lighthouse-list">
+                        <!-- Populated dynamically via JavaScript -->
+                    </tbody>
+                </table>
 
-                        <label for="location">Location</label>
-                        <input type="text" id="location" disabled>
+                <!-- Edit Lighthouse Form Popup -->
+                <div id="editFormPopup" class="popup">
+                    <div class="popup-content">
+                        <button class="close-btn" aria-label="Close" onclick="closeForm()">&times;</button>
+                        <h2>Edit Lighthouse Status</h2>
+                        <form id="editForm">
+                            <input type="hidden" id="lighthouseId">
+                            <label for="name">Name</label>
+                            <input type="text" id="name" disabled>
 
-                        <label for="characteristics">Characteristics</label>
-                        <input type="text" id="characteristics" disabled>
+                            <label for="location">Location</label>
+                            <input type="text" id="location" disabled>
 
-                        <label for="status">Status</label>
-                        <select id="status">
-                            <option value="OK">OK</option>
-                            <option value="Not OK">Not OK</option>
-                        </select>
+                            <label for="characteristics">Characteristics</label>
+                            <input type="text" id="characteristics" disabled>
+
+                            <label for="status">Status</label>
+                            <select id="status">
+                                <option value="OK">OK</option>
+                                <option value="Not OK">Not OK</option>
+                            </select>
+
+                            <div class="form-buttons">
+                                <span class="cancel-text" onclick="cancelEdit()">Cancel</span>
+                                <span class="save-text" onclick="saveStatus()">Save</span>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Documents View -->
+            <section id="documentsView" class="view hidden">
+                <header class="header">
+                    <h1>Documents</h1>
+                </header>
+
+                <!-- Button to Add New Document -->
+                <button class="upload-btn" aria-label="Add New Document" id="uploadBtn">Add New Document</button>
+
+                <!-- Document Upload Form (Hidden initially) -->
+                <div id="uploadForm" class="upload-form hidden">
+                    <h3>Upload New Document</h3>
+                    <form id="documentUploadForm" enctype="multipart/form-data">
+                        <label for="documentTitle">Title</label>
+                        <input type="text" id="documentTitle" name="title" required>
+
+                        <label for="documentFile">Choose File</label>
+                        <input type="file" id="documentFile" name="file" accept="application/pdf" required>
 
                         <div class="form-buttons">
-                            <span class="cancel-text" onclick="cancelEdit()">Cancel</span>
-                            <span class="save-text" onclick="saveStatus()">Save</span>
+                            <button type="submit" class="save-text">Upload</button>
+                            <button type="button" class="cancel-text" onclick="toggleUploadForm()">Cancel</button>
                         </div>
                     </form>
                 </div>
-            </div>
+
+                <!-- Documents Table -->
+                <table class="table" id="documentsTable">
+                    <thead>
+                        <tr>
+                            <th>Document ID</th>
+                            <th>Document Name</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="documents-list">
+                        <!-- Document rows will be populated here dynamically -->
+                    </tbody>
+                </table>
+            </section>
+
+            <!-- Notification -->
             <div id="notification" class="notification"></div>
         </main>
     </div>
+
+    <!-- JavaScript -->
     <script src="scripts/dashboard.js"></script>
 </body>
 </html>
