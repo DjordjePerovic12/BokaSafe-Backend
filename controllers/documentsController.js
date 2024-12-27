@@ -9,19 +9,27 @@ const getAllDocuments = async(req, res) => {
     res.json(documents);
 };
 
-const uploadDocument = async(req, res) => {
-    // Multer will add the file to req.file, so check if it exists.
+const uploadDocument = async (req, res) => {
+    // Multer will add the file to req.file, so check if it exists
     if (!req.file) {
         return res.status(400).json({ message: 'File is required' });
     }
 
-    try {
-        // Create a document record with the file UR
-        // uploaL
-        const result = await Document.create({
-            url: `/uploads/${req.file.filename}`  // URL relative to your static folder
-        });
+    // Get the file name from the form data (sent by the client)
+    const { fileName } = req.body;  // This is the file name sent as 'fileName' in the form data
+    if (!fileName) {
+        return res.status(400).json({ message: 'File name is required' });
+    }
 
+    try {
+        // Create a document record with the file URL and file name
+        const result = await Document.create({
+            url: `/uploads/${req.file.filename}`,  // URL relative to your static folder
+            name: fileName  // Save the file name sent by the client
+        });
+        console.log(result);
+
+        // Respond with the document object after creation
         res.status(201).json(result);
     } catch (err) {
         console.log(err);

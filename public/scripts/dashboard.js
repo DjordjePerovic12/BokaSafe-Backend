@@ -228,11 +228,15 @@ async function uploadDocument(event) {
         return;  // Exit if no file is selected
     }
 
+    // Add file name explicitly (if it's not already included in formData)
+    const fileName = file.name; // Get the file's original name
+    formData.append('fileName', fileName); // Append it to form data
+
     console.log("Selected file:", file);  // Log the file (remove this in production)
-    
+
     // Log the entire FormData (Note: This is not the best way to log FormData, but it works for small cases)
     for (let pair of formData.entries()) {
-        console.log(pair[0]+ ': ' + pair[1]);
+        console.log(pair[0] + ': ' + pair[1]);
     }
 
     const baseUrl = window.location.origin;
@@ -246,7 +250,7 @@ async function uploadDocument(event) {
     try {
         const response = await fetch(`${baseUrl}/api/documents`, {
             method: 'POST',
-            body: formData,  // Send the form data (which includes the file)
+            body: formData,  // Send the form data (which includes the file and its name)
         });
 
         if (!response.ok) throw new Error("Failed to upload document");
@@ -270,6 +274,7 @@ async function uploadDocument(event) {
         }
     }
 }
+
 
 
 
