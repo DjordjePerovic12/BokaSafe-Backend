@@ -7,6 +7,7 @@ const mongoose = require('mongoose');
 const connectDB = require('./config/dbConnection');
 const Lighthouse = require('./model/Lighthouse');
 const Document = require('./model/Document');
+const FishFarm = require('./model/FishFarm');
 const { populateDB } = require('./seeds/seeds');
 const path = require('path');
 const createAdminAccount = require('./public/scripts/createAdminAccount');
@@ -49,7 +50,8 @@ app.use('/api/lighthouses', require('./routes/api/lighthouses'));
 app.use('/admin-login', require('./routes/login'));
 app.use('/refresh', require('./routes/refresh'));
 app.use('/dashboard', require('./routes/dashboard'));
-app.use('/api/documents', require('./routes/api/documents'))
+app.use('/api/documents', require('./routes/api/documents'));
+app.use('/api/fishfarms', require('./routes/api/fishfarms'));
 
 
 mongoose.connection.once('open', async () => {
@@ -62,6 +64,15 @@ mongoose.connection.once('open', async () => {
         await populateDB();
     } else {
         console.log('Lighthouses already exist in the database.');
+
+    }
+
+    const fishFarmCount = await FishFarm.countDocuments({});
+    if (fishFarmCount === 0) {
+        console.log('No fish farms found. Populating database....');
+        await populateDB();
+    } else {
+        console.log('Fish farms already exist in the database.');
 
     }
 

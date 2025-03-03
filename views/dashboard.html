@@ -18,6 +18,7 @@
                 <ul>
                     <li><a href="#" id="lighthousesMenu" class="active">Lighthouses</a></li>
                     <li><a href="#" id="documentsMenu">Documents</a></li>
+                    <li><a href="#" id="fishFarmsMenu">Fish Farms</a></li>
                 </ul>
             </nav>
         </aside>
@@ -29,8 +30,6 @@
                 <header class="header">
                     <h1>Lighthouses</h1>
                 </header>
-
-                <!-- Lighthouses Table -->
                 <table class="table">
                     <thead>
                         <tr>
@@ -39,12 +38,8 @@
                             <th>Edit</th>
                         </tr>
                     </thead>
-                    <tbody id="lighthouse-list">
-                        <!-- Populated dynamically via JavaScript -->
-                    </tbody>
+                    <tbody id="lighthouse-list"></tbody>
                 </table>
-
-                <!-- Edit Lighthouse Form Popup -->
                 <div id="editFormPopup" class="popup">
                     <div class="popup-content">
                         <button class="close-btn" aria-label="Close" onclick="closeForm()">&times;</button>
@@ -53,19 +48,15 @@
                             <input type="hidden" id="lighthouseId">
                             <label for="name">Name</label>
                             <input type="text" id="name" disabled>
-
                             <label for="location">Location</label>
                             <input type="text" id="location" disabled>
-
                             <label for="characteristics">Characteristics</label>
                             <input type="text" id="characteristics" disabled>
-
                             <label for="status">Status</label>
                             <select id="status">
                                 <option value="OK">OK</option>
                                 <option value="Not OK">Not OK</option>
                             </select>
-
                             <div class="form-buttons">
                                 <span class="cancel-text" onclick="cancelEdit()">Cancel</span>
                                 <span class="save-text" onclick="saveStatus()">Save</span>
@@ -80,25 +71,18 @@
                 <header class="header">
                     <h1>Documents</h1>
                 </header>
-
-                <!-- Button to Add New Document -->
                 <button class="upload-btn" aria-label="Add New Document" id="uploadBtn">Add New Document</button>
-
-                <!-- Document Upload Form (Hidden initially) -->
                 <div id="uploadForm" class="upload-form hidden">
                     <h3>Upload New Document</h3>
                     <form id="documentUploadForm" enctype="multipart/form-data">
                         <label for="documentFile">Choose File</label>
                         <input type="file" id="documentFile" name="file" accept="application/pdf" required>
-
                         <div class="form-buttons">
                             <button type="submit" class="save-text">Upload</button>
                             <button type="button" class="cancel-text" onclick="toggleUploadForm()">Cancel</button>
                         </div>
                     </form>
                 </div>
-
-                <!-- Documents Table -->
                 <table class="table" id="documentsTable">
                     <thead>
                         <tr>
@@ -107,18 +91,57 @@
                             <th>Actions</th>
                         </tr>
                     </thead>
-                    <tbody id="documents-list">
-                        <!-- Document rows will be populated here dynamically -->
-                    </tbody>
+                    <tbody id="documents-list"></tbody>
                 </table>
+            </section>
+
+            <!-- Fish Farms View -->
+            <section id="fishFarmsView" class="view hidden">
+                <header class="header">
+                    <h1>Fish Farms</h1>
+                </header>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Location</th>
+                            <th>Capacity</th>
+                            <th>Edit</th>
+                        </tr>
+                    </thead>
+                    <tbody id="fish-farms-list"></tbody>
+                </table>
+                <div id="editFishFarmPopup" class="popup">
+                    <div class="popup-content">
+                        <button class="close-btn" aria-label="Close" onclick="closeFishFarmForm()">&times;</button>
+                        <h2>Edit Fish Farm</h2>
+                        <form id="editFishFarmForm">
+                            <input type="hidden" id="fishFarmId">
+                            <label for="farmName">Name</label>
+                            <input type="text" id="farmName" disabled>
+                            <label for="farmLocation">Location</label>
+                            <input type="text" id="farmLocation" disabled>
+                            <label for="farmCapacity">Capacity</label>
+                            <input type="number" id="farmCapacity" disabled>
+                            <label for="farmStatus">Status</label>
+                            <select id="farmStatus">
+                                <option value="Operational">Operational</option>
+                                <option value="Not Operational">Not Operational</option>
+                            </select>
+                            <div class="form-buttons">
+                                <span class="cancel-text" onclick="cancelFishFarmEdit()">Cancel</span>
+                                <span class="save-text" onclick="saveFishFarmStatus()">Save</span>
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </section>
 
             <!-- Notification -->
             <div id="notification" class="notification"></div>
         </main>
     </div>
-
-    <!-- JavaScript -->
     <script src="scripts/dashboard.js"></script>
 </body>
 </html>

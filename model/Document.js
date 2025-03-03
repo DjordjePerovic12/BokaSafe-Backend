@@ -6,15 +6,15 @@ const Schema = mongoose.Schema;
 const documentSchema = new Schema ({
         url: String,
         name: String,
-        id: { 
-                type: Number,
-                unique: true
-        }
+        id: Number,
+               
+        
 });
 
 documentSchema.plugin(autoIncrement, {
-        inc_field: 'id',     // The field to auto-increment
-        start_seq: 1         // Start the sequence from 1
+        id: "document_seq", // Unique counter name for Document
+        inc_field: "id",
+        start_seq: 1
     });
 
 module.exports = mongoose.model('Document', documentSchema);
