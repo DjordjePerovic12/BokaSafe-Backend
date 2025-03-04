@@ -13,6 +13,7 @@ const path = require('path');
 const createAdminAccount = require('./public/scripts/createAdminAccount');
 const fs = require('fs');
 const MarineProtectedArea = require('./model/MarineProtectedArea');
+const Marina = require('./model/Marina')
 
 const PORT = process.env.PORT || 3500;
 
@@ -54,6 +55,7 @@ app.use('/dashboard', require('./routes/dashboard'));
 app.use('/api/documents', require('./routes/api/documents'));
 app.use('/api/fishfarms', require('./routes/api/fishfarms'));
 app.use('/api/marineProtectedAreas', require('./routes/api/marineProtectedAreas'));
+app.use('/api/marinas', require('./routes/api/marinas'));
 
 
 mongoose.connection.once('open', async () => {
@@ -84,6 +86,15 @@ mongoose.connection.once('open', async () => {
         await populateDB();
     } else {
         console.log('Marine protected areas already exist in the database.');
+
+    }
+
+    const marinaCount = await Marina.countDocuments({});
+    if (marinaCount === 0) {
+        console.log('No marinas found. Populating database....');
+        await populateDB();
+    } else {
+        console.log('Marinas already exist in the database.');
 
     }
 

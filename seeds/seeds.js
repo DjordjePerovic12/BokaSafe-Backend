@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const Lighthouse = require('../model/Lighthouse');
 const FishFarm = require('../model/FishFarm');
 const MarineProtectedArea = require('../model/MarineProtectedArea');
+const Marina = require('../model/Marina');
 
 
 const lighthouses = [
@@ -413,6 +414,82 @@ const marineProtectedAreas = [
         },
 ];
 
+
+const marinas = [
+    {
+    id:1,
+    name: "Brodogradilišna luka Bijela",
+    isSelected: false, 
+    coordinates: 
+        {lat: 42.4488657, lng: 18.6526638}
+    },
+    {
+    id:2,
+    name: "Luka Zelenika",
+    isSelected: false, 
+    coordinates: 
+        {lat: 42.448822, lng: 18.5730532}
+    },
+    {
+        id:3,
+        name: "Luka Herceg Novi - gradska luka Škver",
+        isSelected: false, 
+        coordinates: 
+            {lat: 42.4504341, lng: 18.5330326}
+    },
+    {
+        id:4,
+        name: "Marina Lazure - Meljine",
+        isSelected: false, 
+        coordinates: 
+            {lat: 42.4533197, lng: 18.5607677}
+    },
+    {
+        id:5,
+        name: "D-Marina Portonovi - Kumbor",
+        isSelected: false, 
+        coordinates: 
+            {lat: 42.4334549, lng: 18.6035853}
+    },
+    {
+        id:6,
+        name: "Luka Kotor",
+        isSelected: false, 
+        coordinates: 
+            {lat: 42.423282, lng: 18.7702177}
+    },
+    {
+        id:7,
+        name: "Marina Risan",
+        isSelected: false, 
+        coordinates: 
+            {lat: 42.5132109, lng: 18.6947726}
+    },
+    {
+        id:8,
+        name: "Porto Montenegro",
+        isSelected: false, 
+        coordinates: 
+            {lat: 42.4334053, lng: 18.6902133}
+    },
+    {
+        id:1,
+        name: "Brodogradilišna luka Bonići",
+        isSelected: false, 
+        coordinates: 
+            {lat: 42.4186683, lng: 18.7085776}
+    },
+    {
+        id:1,
+        name: "Marina Kalimanj",
+        isSelected: false, 
+        coordinates: 
+            {lat: 42.4279671, lng: 18.7009302}
+    },
+
+];
+
+
     
 
 module.exports = fishFarms;
@@ -430,6 +507,8 @@ const populateDB = async () => {
         // Insert marine protected area data
         await MarineProtectedArea.insertMany(marineProtectedAreas);
         console.log('Marine protected areas seeded successfully!');
+        await Marina.insertMany(marinas);
+        console.log('Marinas seeded successfully!');
     } catch (error) {
         console.error('Error populating database:', error);
     }
