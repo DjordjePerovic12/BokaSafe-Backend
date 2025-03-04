@@ -382,6 +382,7 @@ const fishFarms = [{isSelected: false, centralCoordinate: {lat: 42.4747265, lng:
 
 const marineProtectedAreas = [
     {
+    id:1,
     name: "Sopot - Marine Protected Area (MPA)",
     isSelected: false, 
     mpaSymbolCoordinate: { lat: 42.5103152, lng: 18.6802068},
@@ -395,6 +396,7 @@ const marineProtectedAreas = [
     ]
     },
     {
+        id: 2,
         name: "Dražin vrt - Marine Protected Area (MPA)",
         isSelected: false, 
         mpaSymbolCoordinate: { lat: 42.4832234, lng: 18.715105},
