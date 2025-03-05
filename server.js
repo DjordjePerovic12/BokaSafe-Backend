@@ -61,45 +61,20 @@ app.use('/api/marinas', require('./routes/api/marinas'));
 mongoose.connection.once('open', async () => {
     console.log('Connected to MongoDB');
 
-
+    // Check if collections already contain data
     const lighthouseCount = await Lighthouse.countDocuments({});
-    if (lighthouseCount === 0) {
-        console.log('No lighthouses found. Populating database....');
-        await populateDB();
-    } else {
-        console.log('Lighthouses already exist in the database.');
-
-    }
-
     const fishFarmCount = await FishFarm.countDocuments({});
-    if (fishFarmCount === 0) {
-        console.log('No fish farms found. Populating database....');
-        await populateDB();
-    } else {
-        console.log('Fish farms already exist in the database.');
-
-    }
-
     const marineProtectedAreaCount = await MarineProtectedArea.countDocuments({});
-    if (marineProtectedAreaCount === 0) {
-        console.log('No marine protected areas found. Populating database....');
-        await populateDB();
-    } else {
-        console.log('Marine protected areas already exist in the database.');
-
-    }
-
     const marinaCount = await Marina.countDocuments({});
-    if (marinaCount === 0) {
-        console.log('No marinas found. Populating database....');
+
+    if (lighthouseCount === 0 && fishFarmCount === 0 && marineProtectedAreaCount === 0 && marinaCount === 0) {
+        console.log('Database is empty. Populating database...');
         await populateDB();
     } else {
-        console.log('Marinas already exist in the database.');
-
+        console.log('Database already contains data. Skipping population.');
     }
-
 
     app.listen(PORT, () => {
         console.log(`Server running on port ${PORT}`);
     });
-})
+});

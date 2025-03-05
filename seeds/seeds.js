@@ -490,29 +490,28 @@ const marinas = [
 ];
 
 
-    
-
-module.exports = fishFarms;
-
-
 const populateDB = async () => {
     try {
-        // Insert data
+        // Insert lighthouse data
         await Lighthouse.insertMany(lighthouses);
-        console.log('Database seeded successfully!');
+        console.log('Lighthouses seeded successfully!');
         
         // Insert fish farm data
         await FishFarm.insertMany(fishFarms);
         console.log('Fish farms seeded successfully!');
+
         // Insert marine protected area data
         await MarineProtectedArea.insertMany(marineProtectedAreas);
         console.log('Marine protected areas seeded successfully!');
+
+        // Insert marina data
         await Marina.insertMany(marinas);
         console.log('Marinas seeded successfully!');
     } catch (error) {
         console.error('Error populating database:', error);
     }
 };
+
 
 
 module.exports = { populateDB };
