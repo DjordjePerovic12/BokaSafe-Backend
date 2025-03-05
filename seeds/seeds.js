@@ -473,14 +473,14 @@ const marinas = [
             {lat: 42.4334053, lng: 18.6902133}
     },
     {
-        id:1,
+        id:9,
         name: "Brodogradilišna luka Bonići",
         isSelected: false, 
         coordinates: 
             {lat: 42.4186683, lng: 18.7085776}
     },
     {
-        id:1,
+        id:10,
         name: "Marina Kalimanj",
         isSelected: false, 
         coordinates: 
