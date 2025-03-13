@@ -7,7 +7,6 @@ document.getElementById("loginForm").addEventListener("submit", async function (
     // Get username and password from the form inputs
     const username = document.getElementById("username").value.trim();
     const password = document.getElementById("password").value.trim();
-    console.log(username, password);
 
     // Validate the form inputs
     if (!username || !password) {
