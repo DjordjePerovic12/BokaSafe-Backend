@@ -13,16 +13,28 @@ const getDocumentByID = async (req, res) => {
 };
 
 const deleteDocument = async (req, res) => {
-    if (!req.body.id) {
-        return res.status(400).json({ message: 'ID required.' });
+    const { id } = req.body;
+
+    if (!id) {
+        return res.status(400).json({ message: 'Document ID is required.' });
     }
 
-    const document = await Document.findById(req.body.id);
-    if (!document) return res.status(404).json({ message: 'Document not found.' });
+    try {
+        const document = await Document.findById(id);
+        
+        if (!document) {
+            return res.status(404).json({ message: 'Document not found.' });
+        }
 
-    await document.deleteOne();
-    res.json({ message: 'Document deleted.' });
+        await Document.deleteOne({ _id: id });
+        res.json({ message: 'Document deleted successfully.' });
+
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ message: 'Server error during deletion.' });
+    }
 };
+
 
 const uploadDocument = async (req, res) => {
     if (!req.file) {
