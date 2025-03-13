@@ -156,21 +156,27 @@ function toggleUploadForm() {
 
 async function uploadDocument(event) {
     event.preventDefault();
+
     const form = document.getElementById("documentUploadForm");
     const formData = new FormData(form);
-    const file = formData.get('file');
-    if (!file) return showNotification("Please select a file to upload.", "error");
 
-    const response = await fetch('/api/documents', { method: 'POST', body: formData });
+    const response = await fetch('/api/documents', {
+        method: 'POST',
+        body: formData,
+    });
+
     if (response.ok) {
         showNotification("Document uploaded successfully.", "success");
         document.getElementById("uploadForm").classList.add("hidden");
         form.reset();
         fetchDocuments();
     } else {
+        const errMsg = await response.text();
+        console.error(errMsg);
         showNotification("Error uploading document.", "error");
     }
 }
+
 
 async function deleteDocument(id) {
     const response = await fetch('/api/documents', { method: 'DELETE', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ id }) });
