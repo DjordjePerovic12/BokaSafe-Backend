@@ -19,59 +19,28 @@
                     <li><a href="#" id="lighthousesMenu" class="active">Lighthouses</a></li>
                     <li><a href="#" id="documentsMenu">Documents</a></li>
                     <li><a href="#" id="fishFarmsMenu">Fish Farms</a></li>
+                    <li><a href="#" id="marineProtectedAreasMenu">Marine Protected Areas</a></li>
+                    <li><a href="#" id="marinasMenu">Marinas</a></li>
                 </ul>
             </nav>
         </aside>
 
         <!-- Main Content Area -->
         <main class="main-content">
+
             <!-- Lighthouses View -->
             <section id="lighthousesView" class="view active">
-                <header class="header">
-                    <h1>Lighthouses</h1>
-                </header>
+                <header class="header"><h1>Lighthouses</h1></header>
                 <table class="table">
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Name</th>
-                            <th>Edit</th>
-                        </tr>
-                    </thead>
+                    <thead><tr><th>ID</th><th>Name</th><th>Edit</th></tr></thead>
                     <tbody id="lighthouse-list"></tbody>
                 </table>
-                <div id="editFormPopup" class="popup">
-                    <div class="popup-content">
-                        <button class="close-btn" aria-label="Close" onclick="closeForm()">&times;</button>
-                        <h2>Edit Lighthouse Status</h2>
-                        <form id="editForm">
-                            <input type="hidden" id="lighthouseId">
-                            <label for="name">Name</label>
-                            <input type="text" id="name" disabled>
-                            <label for="location">Location</label>
-                            <input type="text" id="location" disabled>
-                            <label for="characteristics">Characteristics</label>
-                            <input type="text" id="characteristics" disabled>
-                            <label for="status">Status</label>
-                            <select id="status">
-                                <option value="OK">OK</option>
-                                <option value="Not OK">Not OK</option>
-                            </select>
-                            <div class="form-buttons">
-                                <span class="cancel-text" onclick="cancelEdit()">Cancel</span>
-                                <span class="save-text" onclick="saveStatus()">Save</span>
-                            </div>
-                        </form>
-                    </div>
-                </div>
             </section>
 
             <!-- Documents View -->
             <section id="documentsView" class="view hidden">
-                <header class="header">
-                    <h1>Documents</h1>
-                </header>
-                <button class="upload-btn" aria-label="Add New Document" id="uploadBtn">Add New Document</button>
+                <header class="header"><h1>Documents</h1></header>
+                <button class="upload-btn" id="uploadBtn">Add New Document</button>
                 <div id="uploadForm" class="upload-form hidden">
                     <h3>Upload New Document</h3>
                     <form id="documentUploadForm" enctype="multipart/form-data">
@@ -84,64 +53,70 @@
                     </form>
                 </div>
                 <table class="table" id="documentsTable">
-                    <thead>
-                        <tr>
-                            <th>Document ID</th>
-                            <th>Document Name</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
+                    <thead><tr><th>Document ID</th><th>Document Name</th><th>Actions</th></tr></thead>
                     <tbody id="documents-list"></tbody>
                 </table>
             </section>
 
             <!-- Fish Farms View -->
             <section id="fishFarmsView" class="view hidden">
-                <header class="header">
-                    <h1>Fish Farms</h1>
-                </header>
+                <header class="header"><h1>Fish Farms</h1></header>
                 <table class="table">
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Name</th>
-                            <th>Location</th>
-                            <th>Capacity</th>
-                            <th>Edit</th>
-                        </tr>
-                    </thead>
+                    <thead><tr><th>ID</th><th>Location</th></tr></thead>
                     <tbody id="fish-farms-list"></tbody>
                 </table>
-                <div id="editFishFarmPopup" class="popup">
-                    <div class="popup-content">
-                        <button class="close-btn" aria-label="Close" onclick="closeFishFarmForm()">&times;</button>
-                        <h2>Edit Fish Farm</h2>
-                        <form id="editFishFarmForm">
-                            <input type="hidden" id="fishFarmId">
-                            <label for="farmName">Name</label>
-                            <input type="text" id="farmName" disabled>
-                            <label for="farmLocation">Location</label>
-                            <input type="text" id="farmLocation" disabled>
-                            <label for="farmCapacity">Capacity</label>
-                            <input type="number" id="farmCapacity" disabled>
-                            <label for="farmStatus">Status</label>
-                            <select id="farmStatus">
-                                <option value="Operational">Operational</option>
-                                <option value="Not Operational">Not Operational</option>
-                            </select>
-                            <div class="form-buttons">
-                                <span class="cancel-text" onclick="cancelFishFarmEdit()">Cancel</span>
-                                <span class="save-text" onclick="saveFishFarmStatus()">Save</span>
-                            </div>
-                        </form>
-                    </div>
-                </div>
             </section>
+
+            <!-- Marine Protected Areas View -->
+            <section id="marineProtectedAreasView" class="view hidden">
+                <header class="header"><h1>Marine Protected Areas</h1></header>
+                <table class="table">
+                    <thead><tr><th>ID</th><th>Name</th><th>Location</th></tr></thead>
+                    <tbody id="marine-protected-areas-list"></tbody>
+                </table>
+            </section>
+
+            <!-- Marinas View -->
+            <section id="marinasView" class="view hidden">
+                <header class="header"><h1>Marinas</h1></header>
+                <table class="table">
+                    <thead><tr><th>ID</th><th>Name</th><th>Location</th></tr></thead>
+                    <tbody id="marinas-list"></tbody>
+                </table>
+            </section>
+
+            <!-- Lighthouse Edit Popup (Integrated Correctly Here) -->
+            <div id="editFormPopup" class="popup">
+                <div class="popup-content">
+                    <button class="close-btn" onclick="closeForm()">&times;</button>
+                    <h2>Edit Lighthouse Status</h2>
+                    <form id="editForm">
+                        <input type="hidden" id="lighthouseId">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" disabled>
+                        <label for="location">Location</label>
+                        <input type="text" id="location" disabled>
+                        <label for="characteristics">Characteristics</label>
+                        <input type="text" id="characteristics" disabled>
+                        <label for="status">Status</label>
+                        <select id="status">
+                            <option value="OK">OK</option>
+                            <option value="Not OK">Not OK</option>
+                        </select>
+                        <div class="form-buttons">
+                            <span class="cancel-text" onclick="cancelEdit()">Cancel</span>
+                            <span class="save-text" onclick="saveStatus()">Save</span>
+                        </div>
+                    </form>
+                </div>
+            </div>
 
             <!-- Notification -->
             <div id="notification" class="notification"></div>
+
         </main>
     </div>
+
     <script src="scripts/dashboard.js"></script>
 </body>
 </html>
