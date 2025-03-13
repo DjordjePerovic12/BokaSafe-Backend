@@ -177,20 +177,23 @@ async function uploadDocument(event) {
     }
 }
 
+
 async function deleteDocument(id) {
     const response = await fetch('/api/documents', {
         method: 'DELETE',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ id })
+        body: JSON.stringify({ id }), // numeric id from your table
     });
 
     if (response.ok) {
         showNotification("Document deleted successfully.", "success");
         fetchDocuments();
     } else {
-        showNotification("Error deleting document.", "error");
+        const error = await response.json();
+        showNotification(error.message || "Error deleting document.", "error");
     }
 }
+
 
 // ----------------- Degree Converter -----------------
 
